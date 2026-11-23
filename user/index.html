@@ -20,7 +20,7 @@
             }
             body {
                 margin: 0;
-                background-color: #F0F0EB;
+                background-color: #FAF8F6;
                 font-family: 'Inter', sans-serif;
                 header {
                     background-color: white;
@@ -65,6 +65,43 @@
                         }
                     }
                 }
+
+                main {
+                    div.greetings {
+                        background-color: #F5E9E7;
+                        margin: 15px;
+                        padding: 10px 15px;
+                        border-radius: 10px;
+                        p {
+                            color: #71756F;
+                        }
+                    }
+                    div.search {
+                        margin: 15px;
+                        h2 {
+                            margin-bottom: 0;
+                        }
+                        p {
+                            margin-top: 0;
+                            color: #71756F;
+                        }
+                        form {
+                            input {
+                                border: 0;
+                                border-radius: 5px;
+                                padding: 10px;
+                            }
+                            input[name="input-terapkan"] {
+                                background-color:#71756F;
+                                color: white;
+                            }
+                            input[name="input-reset"] {
+                                color: #71756F;
+                                background-color: #FAF8F6;
+                            }
+                        }
+                    }
+                }
             }
         </style>
     </head>
@@ -82,5 +119,24 @@
                 <a id="tambah_memori" href="tambah_memori.html">+ Unggah Memori</a>
             </div>
         </header>
+        <main>
+            <div class="greetings">
+                <h1 th:text="Halo, ${username}!">Halo, Wombats!</h1>
+                <p>Rekam momen indahmu dan bagikan pada seluruh dunia</p>
+            </div>
+            <!-- belom beres -->
+            <div class="search">
+                <h2>Jelajahi Memori</h2>
+                <p th:text="${memories.num} memori dari komunitas">sekian memori dari komunitas</p>
+                <div class="search-bar">
+                    <span class="badge-tag-aktif" 
+                </div>
+                <form>
+                    <input name="input-search" type="text" value="Cari berdasarkan deskripsi dan tag memori...">
+                    <input name="input-terapkan" type="submit" value="Terapkan">
+                    <input name="input-reset" type="submit" value="Reset">
+                </form>
+            </div>
+        </main>
     </body>
 </html>
