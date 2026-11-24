@@ -101,6 +101,17 @@
                             }
                         }
                     }
+                    .search {
+                        span span {
+                            background-color: #71756F;
+                            color: white;
+                            padding: 5px;
+                            border-radius: 15px;
+                        }
+                        form {
+                            margin-top: 15px;
+                        }
+                    }
                 }
             }
         </style>
@@ -124,15 +135,19 @@
                 <h1 th:text="Halo, ${username}!">Halo, Wombats!</h1>
                 <p>Rekam momen indahmu dan bagikan pada seluruh dunia</p>
             </div>
-            <!-- belom beres -->
+            <!-- cocokin th nya -->
             <div class="search">
                 <h2>Jelajahi Memori</h2>
                 <p th:text="${memories.num} memori dari komunitas">sekian memori dari komunitas</p>
-                <div class="search-bar">
-                    <span class="badge-tag-aktif" 
-                </div>
-                <form>
-                    <input name="input-search" type="text" value="Cari berdasarkan deskripsi dan tag memori...">
+                <span th:each="tag : ${daftarTag}">
+                    <span th:text="${tag}">
+                        tags
+                        <a id="delete-tags">x</a>
+                    </span>
+                </span>
+                <form th:action = "@{input/search}">
+                    <input name="input-search-tag" type="text" placeholder="⌕ Cari berdasarkan tag memori...">
+                    <input name="input-search-deskripsi" type="text" placeholder="⌕ Cari berdasarkan deskripsi memori...">
                     <input name="input-terapkan" type="submit" value="Terapkan">
                     <input name="input-reset" type="submit" value="Reset">
                 </form>
