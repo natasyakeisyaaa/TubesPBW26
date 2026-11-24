@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Dashboard</title>
         <style>
@@ -22,50 +22,7 @@
                 margin: 0;
                 background-color: #FAF8F6;
                 font-family: 'Inter', sans-serif;
-                header {
-                    background-color: white;
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-                    padding: 5px 15px;
-                    font-size: 10px;
-                    a {
-                        text-decoration: none;
-                    }
-                    .logo {
-                        color: black;
-                        font-weight: bold;
-                        font-size: 15px;
-                        display: flex;
-                        flex-direction: row;
-                        align-items: center;
-                        gap: 7px;
-                        img {
-                            width: 20px;
-                            height: 20px;
-                        }
-                    }
-                    .header-action {
-                        a {
-                            color:#71756F
-                        }
-                        a#jelajahi {
-                            background-color: #F5E9E7;
-                            padding: 5px;
-                            border-radius: 5px;
-                        }
-
-                    }
-                    .unggah-memori {
-                        background-color: #71756F;
-                        padding: 5px;
-                        border-radius: 5px;
-                        a {
-                           color: white;
-                        }
-                    }
-                }
-
+                
                 main {
                     div.greetings {
                         background-color: #F5E9E7;
@@ -86,6 +43,7 @@
                             color: #71756F;
                         }
                         form {
+                            margin-top: 10px;
                             input {
                                 border: 0;
                                 border-radius: 5px;
@@ -100,16 +58,44 @@
                                 background-color: #FAF8F6;
                             }
                         }
-                    }
-                    .search {
                         span span {
                             background-color: #71756F;
                             color: white;
-                            padding: 5px;
+                            padding: 2px 5px;
                             border-radius: 15px;
                         }
-                        form {
-                            margin-top: 15px;
+                    }
+                    .card-grid {
+                        margin: 15px;
+                        display: grid;
+                        grid-template-columns: repeat(3, 1fr);
+                        gap: 15px;
+                        .card-content {
+                            background-color: white;
+                            min-width: 0;
+                            border-radius: 10px;
+                            img {
+                                width: 100%;
+                                height:200px;
+                            }
+                            #card-text {
+                                margin: 10px;
+                                display: flex;
+                                flex-direction: column;
+                                gap: 10px;
+                            }
+                            span:nth-of-type(2), span span{
+                                color: #71756F;
+                            }
+                            span span {
+                                border-radius: 20px;
+                                background-color: #F5E9E7;
+                                padding: 0 5px;
+                            }
+                            #card-row3 {
+                                display: flex;
+                                justify-content: space-between;
+                            }
                         }
                     }
                 }
@@ -117,41 +103,49 @@
         </style>
     </head>
     <body>
-        <header>
-            <div class="logo">
-                <img alt="logo" src="../assets/logo.png">
-                <p>memorie</p>
-            </div>
-            <div class="header-action">
-                <a id="jelajahi" href="index.html">Jelajahi</a>
-                <a id="galeri-saya" href="galeri_saya.html">Galeri saya</a>
-            </div>
-            <div class="unggah-memori">
-                <a id="tambah_memori" href="tambah_memori.html">+ Unggah Memori</a>
-            </div>
-        </header>
+        <div th:replace="~{/fragment/navbar :: navbar('jelajahi')}"></div>
         <main>
             <div class="greetings">
-                <h1 th:text="Halo, ${username}!">Halo, Wombats!</h1>
+                <h1 th:text="|Halo, ${username}!|">Halo, Wombats!</h1>
                 <p>Rekam momen indahmu dan bagikan pada seluruh dunia</p>
             </div>
             <!-- cocokin th nya -->
             <div class="search">
                 <h2>Jelajahi Memori</h2>
-                <p th:text="${memories.num} memori dari komunitas">sekian memori dari komunitas</p>
+                <p th:text="|${memories.num} memori dari komunitas|">sekian memori dari komunitas</p>
                 <span th:each="tag : ${daftarTag}">
-                    <span th:text="${tag}">
-                        tags
+                    <span>
+                        <span th:text="${tag}">
+                            tags
+                        </span>
                         <a id="delete-tags">x</a>
                     </span>
                 </span>
-                <form th:action = "@{input/search}">
-                    <input name="input-search-tag" type="text" placeholder="⌕ Cari berdasarkan tag memori...">
-                    <input name="input-search-deskripsi" type="text" placeholder="⌕ Cari berdasarkan deskripsi memori...">
+                <form th:action = "@{/input/search}">
+                    <input name="input-search-tag" type="text" placeholder="Cari berdasarkan tag memori...">
+                    <input name="input-search-deskripsi" type="text" placeholder="Cari berdasarkan deskripsi memori...">
                     <input name="input-terapkan" type="submit" value="Terapkan">
                     <input name="input-reset" type="submit" value="Reset">
                 </form>
             </div>
+            <div class="card-grid">
+                <div class="card-content" th:each="content : ${daftarMemori}">
+                    <img src="../src/main/resources/static/assets/content/placeholder.png" th:src="${!#strings.isEmpty(content.image)} ? @{|/assets/content/${content.image}|} : @{/assets/content/placeholder.png}" alt="memori">
+                    <div id="card-text">
+                        <span th:text="${content.description}">Deskripsi</span>                    
+                        <span th:text="|${content.name}  -  ${content.date}|">netizen date</span> 
+                        <span id="card-row3">
+                            <span id="tags" th:each="tag : ${content.daftarTag}">
+                                <span th:text="|#${tag}|">
+                                    tags
+                                </span>
+                            </span>
+                            <a th:href="@{/profil/{user}(user=${content.username})}">Lihat profil</a>
+                        </span>
+                    </div>
+                </div>
+            </div>
         </main>
+            <div th:insert="~{/layout/pagination :: pagination}"></div>
     </body>
 </html>

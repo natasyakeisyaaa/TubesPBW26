@@ -1,0 +1,23 @@
+<div th:fragment="pagination">
+    <nav th:if="${pageCount > 1}">
+        <ul class="pagination-container">
+
+            <li>
+                <a th:href="@{/users/(page=${currentPage} - 1, filter=${description})}" aria-label="Previous" th:class="${currentPage}==1 ? 'disabled' : null">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+
+            <li th:each="i : ${#numbers.sequence(1, pageCount)}">
+                <a th:href="@{/users/(page=${i}, filter=${filter})}" th:text="${i}" th:class="${currentPage}==${i} ? 'disabled' : null"></a>
+            </li>
+
+            <li>
+                <a th:href="@{/users/(page=${currentPage} + 1, filter=${filter})}" aria-label="Next" th:class="${currentPage}==${pageCount} ? 'disabled' : null">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+
+        </ul>
+    </nav>
+</div>

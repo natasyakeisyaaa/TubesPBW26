@@ -1,0 +1,62 @@
+<div th:fragment="navbar(activePage)">
+    <style>
+        header {
+            background-color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 15px;
+            font-size: 10px;
+            a {
+                text-decoration: none;
+            }
+            .logo {
+                color: black;
+                font-weight: bold;
+                font-size: 15px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 7px;
+                img {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+            .header-action {
+                a {
+                    color:#71756F
+                }
+                a.active {
+                    background-color: #F5E9E7;
+                    padding: 5px;
+                    border-radius: 5px;
+                }
+
+            }
+            .unggah-memori {
+                background-color: #71756F;
+                padding: 5px;
+                border-radius: 5px;
+                a {
+                    color: white;
+                }
+            }
+        }
+    </style>
+    <header>
+        <div class="logo">
+            <img alt="logo" src="../assets/logo.png">
+            <p>memorie</p>
+        </div>
+        <div class="header-action">
+            <a id="jelajahi" th:href="@{/}"
+               th:classappend="${activePage=='jelajahi'} ? 'active' : ''">Jelajahi</a>
+            <a id="galeri-saya" th:href="@{/profil}"
+               th:classappend="${activePage=='profil'} ? 'active' : ''">Galeri saya</a>
+        </div>
+        <div class="unggah-memori">
+            <a id="tambah_memori" th:href="@{/tambah}">+ Unggah Memori</a>
+        </div>
+    </header>
+</div>
