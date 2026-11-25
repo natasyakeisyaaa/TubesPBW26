@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Test Login</title>
+    </head>
+    <body>
+        <h1>Login</h1>
+        <p th:if="${error}" th:text="${error}" style="color: red;"></p>
+
+        <form th:action="@{/login}" th:object="${loginForm}" method="post">
+            <div>
+                <label>Username:</label><br>
+                <input type="text" th:field="*{username}">
+                <small th:if="${#fields.hasErrors('username')}" th:errors="*{username}" style="color: red;"></small>
+            </div><br>
+            <div>
+                <label>Password:</label><br>
+                <input type="password" th:field="*{password}">
+                <small th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color: red;"></small>
+            </div><br>
+            <button type="submit">Login</button>
+        </form>
+
+        <p><a th:href="@{/signup}">Belum punya akun? Sign Up</a> | <a th:href="@{/}">Home</a></p>
+    </body>
+</html>

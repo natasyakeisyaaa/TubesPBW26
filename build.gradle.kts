@@ -22,6 +22,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-validation")
 	implementation("org.springframework.boot:spring-boot-starter-webmvc")
 	implementation("org.springframework.boot:spring-boot-starter-jdbc")
+	implementation("org.springframework.security:spring-security-crypto")
 	runtimeOnly(platform("me.paulschwarz:spring-dotenv-bom:5.1.0"))
 	runtimeOnly("me.paulschwarz:springboot4-dotenv")
 	compileOnly("org.projectlombok:lombok")

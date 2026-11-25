@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Test User Dashboard</title>
+    </head>
+    <body>
+        <h1>User Dashboard</h1>
+        <p>Login sebagai: <b th:text="${session.user.fullName}"></b> (@<span th:text="${session.user.username}"></span>) - Role: <b th:text="${session.user.role}"></b></p>
+
+        <p>
+            <a th:href="@{/}">Home</a> |
+            <a th:href="@{/login}">Coba buka /login (harus auto-redirect)</a> |
+            <a th:href="@{/admin/dashboard}">Coba buka /admin/dashboard (User biasa harus ketendang balik)</a>
+        </p>
+
+        <form th:action="@{/logout}" method="post">
+            <button type="submit">Logout</button>
+        </form>
+    </body>
+</html>
