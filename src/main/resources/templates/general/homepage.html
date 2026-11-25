@@ -20,55 +20,114 @@
             }
             body {
                 margin: 0;
-                background-color: #FAF8F6;
+                background-color: #FAF9F7;
                 font-family: 'Inter', sans-serif;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                .auth {
-                    margin-right: 15px;
-                    margin-top: 15px;
+                
+                .intro {
                     display: flex;
-                    gap: 10px;
-                    a {
-                        padding: 5px;
-                        border-radius: 5px;
+                    flex-direction: column;
+                    width: 100%;
+                    align-items: center;
+                    .auth {
+                        margin-right: 20px;
+                        margin-top: 20px;
+                        display: flex;
+                        align-self: flex-end;
+                        gap: 10px;
+                        font-size: 20px;
+                        a {
+                            padding: 5px;
+                            border-radius: 5px;
+                        }
+                        a:nth-of-type(1) {
+                            background-color: #71756F;
+                            color: white;
+                        }
+                        a:nth-of-type(2) {
+                            color: #71756F;
+                        }
                     }
-                    a:nth-of-type(1) {
-                        background-color: #71756F;
-                        color: white;
+                    
+                    .logo {
+                        margin: 0;
+                        color: black;
+                        font-weight: bold;
+                        font-size: 75px;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        gap: 7px;
+                        img {
+                            width: 50px;
+                            height: 50px;
+                        }
                     }
-                    a:nth-of-type(2) {
-                        background-color:  #F5E9E7;
+                     p{
+                        margin: 0;
+                        margin-top: 20px;
+                        padding-bottom: 20px;
+                     }
+                }
+
+                .about {
+                    background-color: #F5E9E7;
+                    margin: 30px;
+                    border-radius: 10px;
+                    display: flex;
+                    padding: 20px;
+                    gap: 10%;
+                    #text-about{
+                        h2 {
+                            font-size: 50px;
+                        }
+                        p:nth-of-type(1) {
+                            color: #71756F;
+                        }
+                        p {
+                            margin-bottom: 70px;
+                            line-height: 2;
+                        }
+                        a {
+                            padding: 10px;
+                            border-radius: 5px;
+                            background-color: #71756F;
+                            color: white;
+                        }
+                    }
+                    img {
+                        border-radius: 10px;
                     }
                 }
-                .logo {
-                color: black;
-                font-weight: bold;
-                font-size: 75px;
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                gap: 7px;
-                img {
-                    width: 50px;
-                    height: 50px;
-                }
-            }
+                
             }
         </style>
     </head>
     <body>
-        <div class="auth">
-            <a th:href="{@/signup}">Sign Up</a>
-            <a th:href="{@/login}">Login</a>
-        </div>
-        <div class="logo">
-            <img alt="logo" src="../../static/assets/logo.png">
-            <p>memorie</p>
-        </div>        
-        <div class="about">
+       
+        <div class="intro">
+            <div class="auth">
+                <a th:href="{@/signup}">Sign Up</a>
+                <a th:href="{@/login}">Login</a>
+            </div>
+            <span class="logo">
+                <img alt="logo" src="../../static/assets/logo.png">
+                <p>memorie</p>
+            </span> 
             <p>Buat memori sebanyak mungkin, simpan, dan bagikan pada seluruh dunia.</p>
         </div>
+
+        <div class="about">
+            <div id="text-about">
+                <p>Tentang Memorie</p>
+                <h2>Setiap memori punya cerita.</h2>
+                <p>Kami yakin setiap memori layak untuk diabadikan. Setiap memori punya kenangan indah untuk dibagikan. Memorie adalah sebuah web untuk menyimpan dan membagikan memori indahmu. Kamu bisa memiliki galeri memori dengan deskripsi dan juga tag yang membantumu mengingat kembali memori indah.</p>
+                <a th:href="{@/signup}">Daftar Sekarang</a>
+            </div>
+            <div id="gambar-about">
+                <img src="../../static/assets/content/homepage.jpg">
+            </div>
+        </div>
+        
+        
     </body>
 </html>
