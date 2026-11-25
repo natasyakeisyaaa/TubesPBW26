@@ -1,19 +1,43 @@
+<style>
+    ul.pagination-container {
+        a.disabled {
+            pointer-events: none;
+            color: gray;
+            cursor: not-allowed;
+        }
+        #sebelumnya-btn {
+            background-color: white;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        #page-btn {
+            background-color: #F0F0EB;
+            border-radius: 50px;
+            a.active {
+                background-color: #71756F;
+                color: white;
+            }
+        }
+        #berikutnya-btn {
+            color: #71756F;
+        }
+    }
+</style>
 <div th:fragment="pagination">
     <nav th:if="${pageCount > 1}">
         <ul class="pagination-container">
-
-            <li>
-                <a th:href="@{/users/(page=${currentPage} - 1, filter=${description})}" aria-label="Previous" th:class="${currentPage}==1 ? 'disabled' : null">
+            <li id="sebelumnya-btn">
+                <a th:href="@{/dashboard/(page=${currentPage} - 1, filter=${description})}" aria-label="Sebelumnya" th:class="${currentPage}==1 ? 'disabled' : null">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
 
-            <li th:each="i : ${#numbers.sequence(1, pageCount)}">
-                <a th:href="@{/users/(page=${i}, filter=${filter})}" th:text="${i}" th:class="${currentPage}==${i} ? 'disabled' : null"></a>
+            <li id="page-btn" th:each="i : ${#numbers.sequence(currentPage-1, currentPage+1)}">
+                <a th:href="@{/dashboard/(page=${i}, filter=${filter})}" th:text="${i}" th:class="${currentPage}==${i} ? 'active' : null"></a>
             </li>
 
-            <li>
-                <a th:href="@{/users/(page=${currentPage} + 1, filter=${filter})}" aria-label="Next" th:class="${currentPage}==${pageCount} ? 'disabled' : null">
+            <li id="selanjutnya-btn">
+                <a th:href="@{/dashboard/(page=${currentPage} + 1, filter=${filter})}" aria-label="Selanjutnya" th:class="${currentPage}==${pageCount} ? 'disabled' : null">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>
