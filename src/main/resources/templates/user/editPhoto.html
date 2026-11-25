@@ -5,17 +5,17 @@
         <style>
             @font-face {
                 font-family: 'Inter';
-                src: url('assets/inter/Inter.ttc');
+                src: url('/assets/inter/Inter.ttc');
                 font-style: normal;
             }
             @font-face {
                 font-family: 'Inter';
-                src: url('assets/inter/InterVariable.ttc');
+                src: url('/assets/inter/InterVariable.ttf');
                 font-style: normal;
             }
             @font-face {
                 font-family: 'Inter';
-                src: url('assets/inter/InterVariable-Italic.ttc');
+                src: url('/assets/inter/InterVariable-Italic.ttf');
                 font-style: normal;
             }
 
@@ -280,7 +280,7 @@
         <div class="container">
 
             <div class="back-link">
-                <img href="../../static/assets/panah_kiri.png" alt="Kembali">
+                <img th:src="@{/assets/panah_kiri.png}" alt="Kembali">
                 <span>Kembali ke galeri saya</span>
             </div>
 

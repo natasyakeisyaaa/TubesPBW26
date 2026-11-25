@@ -5,17 +5,17 @@
         <style>
             @font-face {
                 font-family: 'Inter';
-                src: url('assets/inter/Inter.ttc');
+                src: url('/assets/inter/Inter.ttc');
                 font-style: normal;
             }
             @font-face {
                 font-family: 'Inter';
-                src: url('assets/inter/InterVariable.ttc');
+                src: url('/assets/inter/InterVariable.ttf');
                 font-style: normal;
             }
             @font-face {
                 font-family: 'Inter';
-                src: url('assets/inter/InterVariable-Italic.ttc');
+                src: url('/assets/inter/InterVariable-Italic.ttf');
                 font-style: normal;
             }
             body {
@@ -106,11 +106,11 @@
        
         <div class="intro">
             <div class="auth">
-                <a th:href="{@/signup}">Sign Up</a>
-                <a th:href="{@/login}">Login</a>
+                <a th:href="@{/signup}">Sign Up</a>
+                <a th:href="@{/login}">Login</a>
             </div>
             <span class="logo">
-                <img alt="logo" src="../../static/assets/logo.png">
+                <img alt="logo" th:src="@{/assets/logo.png}">
                 <p>memorie</p>
             </span> 
             <p>Buat memori sebanyak mungkin, simpan, dan bagikan pada seluruh dunia.</p>
@@ -121,10 +121,10 @@
                 <p>Tentang Memorie</p>
                 <h2>Setiap memori punya cerita.</h2>
                 <p>Kami yakin setiap memori layak untuk diabadikan. Setiap memori punya kenangan indah untuk dibagikan. Memorie adalah sebuah web untuk menyimpan dan membagikan memori indahmu. Kamu bisa memiliki galeri memori dengan deskripsi dan juga tag yang membantumu mengingat kembali memori indah.</p>
-                <a th:href="{@/signup}">Daftar Sekarang</a>
+                <a th:href="@{/signup}">Daftar Sekarang</a>
             </div>
             <div id="gambar-about">
-                <img src="../../static/assets/content/homepage.jpg">
+                <img th:src="@{/assets/content/homepage.jpg}">
             </div>
         </div>
         

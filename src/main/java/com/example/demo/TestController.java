@@ -10,4 +10,9 @@ public class TestController {
     public String test() {
         return "fragment/navbar"; 
     }
+
+    @GetMapping("/")
+    public String run() {
+        return "general/homepage";
+    }
 }
