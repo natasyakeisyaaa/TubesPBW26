@@ -44,10 +44,19 @@
                         }
                         form {
                             margin-top: 10px;
-                            input {
+                            select, input {
                                 border: 0;
                                 border-radius: 5px;
                                 padding: 10px;
+                            }
+                            select {
+                                color: #71756F;
+                                width: 20%;
+                                margin-right: 5%;
+                            }
+                            input[name="input-search-deskripsi"] {
+                                color: #71756F;
+                                width: 60%;
                             }
                             input[name="input-terapkan"] {
                                 background-color:#71756F;
@@ -58,7 +67,7 @@
                                 background-color: #FAF8F6;
                             }
                         }
-                        span span {
+                        span span span{
                             background-color: #71756F;
                             color: white;
                             padding: 2px 5px;
@@ -77,6 +86,7 @@
                             img {
                                 width: 100%;
                                 height:200px;
+                                border-radius: 10px 10px 0 0;
                             }
                             #card-text {
                                 margin: 10px;
@@ -98,12 +108,20 @@
                             }
                         }
                     }
+                    div.empty-memori {
+                        display: flex;
+                        justify-content: center;
+                        p {
+                            color: #71756F;
+                            font-style: italic;
+                        }
+                    }
                 }
             }
         </style>
     </head>
     <body>
-        <div th:replace="~{/fragment/navbar :: navbar('jelajahi')}"></div>
+        <div th:replace="~{/../fragment/navbar :: navbar('jelajahi')}"></div>
         <main>
             <div class="greetings">
                 <h1 th:text="|Halo, ${username}!|">Halo, Wombats!</h1>
@@ -113,26 +131,30 @@
             <div class="search">
                 <h2>Jelajahi Memori</h2>
                 <p th:text="|${memories.num} memori dari komunitas|">sekian memori dari komunitas</p>
-                <span th:each="tag : ${daftarTag}">
-                    <span>
+                <span th:if="${!#strings.isEmpty(tag)}">
+                    <span th:each="tag : ${daftarTag}">
                         <span th:text="${tag}">
                             tags
+                            <a id="delete-tags">x</a>
                         </span>
-                        <a id="delete-tags">x</a>
                     </span>
                 </span>
                 <form th:action = "@{/input/search}">
-                    <select name="input-search-tag">
-                        
-                    </select>
                     <input name="input-search-deskripsi" type="text" placeholder="Cari berdasarkan deskripsi memori...">
+                    <select name="input-search-tag">
+                        <option value="">Pilih tag memori yang ingin dicari</option>
+                        <option th:each="tag : ${daftarSemuaTag}" th:value="${tag}" th:text="${tag}"></option>
+                    </select>
                     <input name="input-terapkan" type="submit" value="Terapkan">
                     <input name="input-reset" type="submit" value="Reset">
                 </form>
             </div>
-            <div class="card-grid">
+            <div th:if="${#lists.isEmpty(daftarMemori)}" class="empty-memori">
+                <p>Belum ada memori yang diunggah</p>
+            </div>
+            <div th:unless="${#lists.isEmpty(daftarMemori)}" class="card-grid">
                 <div class="card-content" th:each="content : ${daftarMemori}">
-                    <img src="../src/main/resources/static/assets/content/placeholder.png" th:src="${!#strings.isEmpty(content.image)} ? @{|/assets/content/${content.image}|} : @{/assets/content/placeholder.png}" alt="memori">
+                    <img src="../../static/assets/content/placeholder.png" th:src="${!#strings.isEmpty(content.image)} ? @{|/assets/content/${content.image}|} : @{/assets/content/placeholder.png}" alt="memori">
                     <div id="card-text">
                         <span th:text="${content.description}">Deskripsi</span>                    
                         <span th:text="|${content.name}  -  ${content.date}|">netizen date</span> 
@@ -148,6 +170,6 @@
                 </div>
             </div>
         </main>
-            <div th:insert="~{/layout/pagination :: pagination}"></div>
+            <div th:insert="~{/../fragment/pagination :: pagination}"></div>
     </body>
 </html>
