@@ -1,4 +1,11 @@
 <style>
+    #pagination {
+        display: flex;
+        justify-content: space-between;
+        span {
+            color: #71756F;
+        }
+    }
     ul.pagination-container {
         a.disabled {
             pointer-events: none;
@@ -23,7 +30,8 @@
         }
     }
 </style>
-<div th:fragment="pagination">
+<div id="pagination" th:fragment="pagination">
+    <span id="memories-num" th:text="|Menampilkan ${currentPage * 6 - 5} - ${currentPage * 6} dari ${totalMemories} memori"></span>
     <nav th:if="${pageCount > 1}">
         <ul class="pagination-container">
             <li id="sebelumnya-btn">
