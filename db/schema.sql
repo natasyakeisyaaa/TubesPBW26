@@ -3,7 +3,7 @@ CREATE TYPE user_role as ENUM ('ADMIN', 'USER');
 CREATE TABLE IF NOT EXISTS Users (
     id BIGSERIAL PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
-    password_hash VARCHAAR(60) NOT NULL,
+    password_hash VARCHAR(60) NOT NULL,
     full_name VARCHAR(100) NOT NULL,
     role user_role NOT NULL DEFAULT 'USER',
 
@@ -23,9 +23,9 @@ CREATE TABLE IF NOT EXISTS Images (
     user_id BIGINT NOT NULL REFERENCES Users(id) ON DELETE CASCADE,
     description VARCHAR(120) NOT NULL,
     image_path VARCHAR(255) NOT NULL,
-    uploaded_at TIMESTAMPZ NOT NULL DEFAULT NOW(),
+    uploaded_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
 
-    CONSTRAINT ck_description_blank CHECK (btrim(description)<> ''),
+    CONSTRAINT ck_description_blank CHECK (btrim(description)<> '')
 );
 
 CREATE TABLE IF NOT EXISTS Image_Tag (
