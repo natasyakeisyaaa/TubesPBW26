@@ -18,22 +18,44 @@ body {
     background-color: #FAF9F7;
     font-family: 'Inter', sans-serif;   
 }
-.login {
+.auth {
     display: flex;
     align-items: center;
     flex-direction: column;
-    .input-container {
+    margin-top: 20px;
+    p {
+        margin: 0;
+        margin-bottom: 20px;
+    }
+    form.input-container {
         background-color: white;
         border-radius: 10px;
         padding: 20px;
+        width: 25%;
+        margin-bottom: 20px;
         input {
             border: none;
             background-color: #F5E9E7;
             border-radius: 5px;
             padding: 10px;
             height: 20px;
+            width:95%;
         }
     }
+    a {
+        text-decoration: underline;
+        color: #71756F;
+    }
+}
+button.auth-btn {
+    background-color: #71756F;
+    font-weight: bold;
+    color: #FAF8F6;
+    border: none;
+    margin-top: 30px;
+    border-radius: 10px;
+    height: 30px;
+    width: 100%;
 }
 .logo {
     margin: 0;
