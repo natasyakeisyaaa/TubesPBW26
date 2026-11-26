@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Login</title>
+        <link rel="stylesheet" href="../../static/styles.css">
+    </head>
+    <body>
+        <div id="login" class="auth">
+            <span class="logo">
+                <img alt="logo" th:src="@{../../static/assets/content/logo.png}">
+                <p>memorie</p>
+                
+            </span> 
+            <p>Log into memorie.</p>
+            <form class="input-container" method="post" th:action="@{/login}" th:object="${loginForm}">
+                <div id="input-username">
+                    <h3>Username</h3>
+                    <input type="text" placeholder="Isi username anda" th:field="*{username}">
+                </div>
+                <div id="input-password">
+                    <h3>Password</h3>
+                    <input type="password" placeholder="Isi password anda" th:field="*{password}">
+                </div>
+                <button id="submit-login" class="auth-btn">Login</button>
+            </form> 
+            <p>Belum punya akun?</p> <a th:href="@{/signup}">Sign Up</a> 
+        </div>
+    </body>
+</html>

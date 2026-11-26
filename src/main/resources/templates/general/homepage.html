@@ -1,106 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
     <head>
         <title>Homepage Memorie</title>
-        <style>
-            @font-face {
-                font-family: 'Inter';
-                src: url('/assets/inter/Inter.ttc');
-                font-style: normal;
-            }
-            @font-face {
-                font-family: 'Inter';
-                src: url('/assets/inter/InterVariable.ttf');
-                font-style: normal;
-            }
-            @font-face {
-                font-family: 'Inter';
-                src: url('/assets/inter/InterVariable-Italic.ttf');
-                font-style: normal;
-            }
-            body {
-                margin: 0;
-                background-color: #FAF9F7;
-                font-family: 'Inter', sans-serif;
-                
-                .intro {
-                    display: flex;
-                    flex-direction: column;
-                    width: 100%;
-                    align-items: center;
-                    .auth {
-                        margin-right: 20px;
-                        margin-top: 20px;
-                        display: flex;
-                        align-self: flex-end;
-                        gap: 10px;
-                        font-size: 20px;
-                        a {
-                            padding: 5px;
-                            border-radius: 5px;
-                        }
-                        a:nth-of-type(1) {
-                            background-color: #71756F;
-                            color: white;
-                        }
-                        a:nth-of-type(2) {
-                            color: #71756F;
-                        }
-                    }
-                    
-                    .logo {
-                        margin: 0;
-                        color: black;
-                        font-weight: bold;
-                        font-size: 75px;
-                        display: flex;
-                        flex-direction: row;
-                        align-items: center;
-                        gap: 7px;
-                        img {
-                            width: 50px;
-                            height: 50px;
-                        }
-                    }
-                     p{
-                        margin: 0;
-                        margin-top: 20px;
-                        padding-bottom: 20px;
-                     }
-                }
-
-                .about {
-                    background-color: #F5E9E7;
-                    margin: 30px;
-                    border-radius: 10px;
-                    display: flex;
-                    padding: 20px;
-                    gap: 10%;
-                    #text-about{
-                        h2 {
-                            font-size: 50px;
-                        }
-                        p:nth-of-type(1) {
-                            color: #71756F;
-                        }
-                        p {
-                            margin-bottom: 70px;
-                            line-height: 2;
-                        }
-                        a {
-                            padding: 10px;
-                            border-radius: 5px;
-                            background-color: #71756F;
-                            color: white;
-                        }
-                    }
-                    img {
-                        border-radius: 10px;
-                    }
-                }
-                
-            }
-        </style>
+        <link rel="stylesheet" href="../../static/styles.css">
     </head>
     <body>
        
@@ -110,7 +12,7 @@
                 <a th:href="@{/login}">Login</a>
             </div>
             <span class="logo">
-                <img alt="logo" th:src="@{/assets/logo.png}">
+                <img alt="logo" th:src="@{../../static/assets/content/logo.png}">
                 <p>memorie</p>
             </span> 
             <p>Buat memori sebanyak mungkin, simpan, dan bagikan pada seluruh dunia.</p>
@@ -124,7 +26,25 @@
                 <a th:href="@{/signup}">Daftar Sekarang</a>
             </div>
             <div id="gambar-about">
-                <img th:src="@{/assets/content/homepage.jpg}">
+                <img th:src="@{../../static/assets/content/homepage.jpg}">
+            </div>
+        </div>
+
+        <div class="how-to">
+            <div id="step1" class="steps">
+                <h2>Abadikan</h2>
+                <p>Simpan momen indahmu dengan 1 jepretan. Kami menerima gambar untuk Anda bagikan. Simple, mudah, cepat.</p>
+                <img th:src="@{../../static/assets/content/abadikan.png}">
+            </div>
+            <div id="step2" class="steps">
+                <h2>Ceritakan</h2>
+                <p>Tulis deskripsi momenmu dengan maksimal 120 karakter. Singkat tapi bermakna besar.</p>
+                <img th:src="@{../../static/assets/content/ceritakan.png}">
+            </div>
+            <div id="step3" class="steps">
+                <h2>Bagikan</h2>
+                <p>Berikan tag agar konten Anda lebih mudah dilihat oleh komunitas.</p>
+                <img th:src="@{../../static/assets/content/bagikan.png}">
             </div>
         </div>
         
