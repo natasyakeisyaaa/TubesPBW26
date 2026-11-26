@@ -17,10 +17,6 @@ import com.example.demo.model.User;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
-
-
-
-
 @Controller 
 public class AuthController {
     private final AuthService authService;
