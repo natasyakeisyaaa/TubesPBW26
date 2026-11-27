@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Test My Gallery</title>
+    </head>
+    <body>
+        <h1>Galeri Saya</h1>
+        <p>Login sebagai: <b th:text="${session.user.fullName}"></b> (@<span th:text="${session.user.username}"></span>)</p>
+
+        <p>
+            <a th:href="@{/user/dashboard}">Balik ke Dashboard</a> |
+            <a th:href="@{/user/upload}">+ Upload Memori</a> |
+            <a th:href="@{/}">Home</a>
+        </p>
+
+        <p th:if="${success}" th:text="${success}" style="color: green;"></p>
+        <p th:if="${error}" th:text="${error}" style="color: red;"></p>
+
+        <form th:action="@{/user/gallery}" method="get">
+            <input type="text" name="keyword" th:value="${keyword}" placeholder="Cari deskripsi...">
+            <div>
+                <label>Filter Tag (AND):</label><br>
+                <span th:each="tag : ${tags}">
+                    <label>
+                        <input type="checkbox" name="tagIds" th:value="${tag.id}" th:checked="${#lists.contains(selectedTagIds, tag.id)}">
+                        <span th:text="${tag.name}"></span>
+                    </label>
+                </span>
+            </div>
+            <button type="submit">Filter</button>
+            <a th:href="@{/user/gallery}">Reset</a>
+        </form>
+
+        <hr>
+        <p>Total: <b th:text="${gallery.totalItems()}">0</b> gambar (Halaman <span th:text="${gallery.page()}">1</span> dari <span th:text="${gallery.totalPages()}">1</span>)</p>
+
+        <p th:if="${#lists.isEmpty(gallery.items())}">Belum ada gambar.</p>
+
+        <div th:each="img : ${gallery.items()}">
+            <img th:src="@{/user/uploads/{file}(file=${img.imagePath})}" width="220" alt="memori">
+            <p th:text="${img.description}"></p>
+            <p>
+                Tags:
+                <span th:each="t : ${img.tags}" th:text="'#' + ${t.name} + ' '"></span>
+            </p>
+            <details>
+                <summary>Detail</summary>
+                <p>Uploader: <b th:text="${img.fullName}"></b> (@<span th:text="${img.username}"></span>)</p>
+                <p>Waktu Upload: <span th:text="${img.uploadedAt}"></span></p>
+                <img th:src="@{/user/uploads/{file}(file=${img.imagePath})}" width="400" alt="detail">
+            </details>
+            <p>
+                <a th:href="@{/user/gallery/{id}/edit(id=${img.id})}">Edit</a>
+            </p>
+            <form th:action="@{/user/gallery/{id}/delete(id=${img.id})}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+            <hr>
+        </div>
+
+        <p th:if="${gallery.totalPages() > 1}">
+            <a th:if="${gallery.hasPrevious()}"
+               th:href="@{/user/gallery(keyword=${#strings.isEmpty(keyword) ? null : keyword}, tagIds=${#lists.isEmpty(selectedTagIds) ? null : selectedTagIds}, page=${gallery.page() - 1})}">Prev</a>
+            <span th:text="'Page ' + ${gallery.page()} + ' / ' + ${gallery.totalPages()}"></span>
+            <a th:if="${gallery.hasNext()}"
+               th:href="@{/user/gallery(keyword=${#strings.isEmpty(keyword) ? null : keyword}, tagIds=${#lists.isEmpty(selectedTagIds) ? null : selectedTagIds}, page=${gallery.page() + 1})}">Next</a>
+        </p>
+    </body>
+</html>

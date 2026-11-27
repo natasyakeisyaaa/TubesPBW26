@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Test Edit Image</title>
+    </head>
+    <body>
+        <h1>Edit Memori</h1>
+        <p>
+            <a th:href="@{/user/gallery}">Balik ke Galeri</a> |
+            <a th:href="@{/user/dashboard}">Balik ke Dashboard</a>
+        </p>
+
+        <p th:if="${error}" th:text="${error}" style="color: red;"></p>
+
+        <div>
+            <p>Gambar saat ini (<span th:text="${image.imagePath}"></span>):</p>
+            <img th:src="@{/user/uploads/{file}(file=${image.imagePath})}" width="240" alt="Current Image">
+        </div><br>
+
+        <form th:action="@{/user/gallery/{id}/edit(id=${image.id})}" th:object="${editForm}" method="post" enctype="multipart/form-data">
+            <div>
+                <label>Ganti File Gambar (opsional):</label><br>
+                <input type="file" th:field="*{file}" accept=".png,.jpg,.jpeg,.webp">
+                <br><small th:if="${#fields.hasErrors('file')}" th:errors="*{file}" style="color: red;"></small>
+            </div><br>
+
+            <div>
+                <label>Deskripsi (max 120 karakter):</label><br>
+                <textarea th:field="*{description}" rows="3" cols="40" maxlength="120"></textarea>
+                <br><small th:if="${#fields.hasErrors('description')}" th:errors="*{description}" style="color: red;"></small>
+            </div><br>
+
+            <div>
+                <label>Pilih Tag (1–3 tag):</label><br>
+                <span th:each="tag : ${tags}">
+                    <label>
+                        <input type="checkbox" th:field="*{tagIds}" th:value="${tag.id}">
+                        <span th:text="${tag.name}"></span>
+                    </label><br>
+                </span>
+                <small th:if="${#fields.hasErrors('tagIds')}" th:errors="*{tagIds}" style="color: red;"></small>
+            </div><br>
+
+            <button type="submit">Simpan Perubahan</button>
+        </form>
+
+        <hr>
+        <form th:action="@{/user/gallery/{id}/delete(id=${image.id})}" method="post">
+            <button type="submit">Hapus Memori Ini</button>
+        </form>
+    </body>
+</html>

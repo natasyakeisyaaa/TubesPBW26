@@ -11,11 +11,6 @@ public class PageController {
     public String home() {
         return "test/home";
     }
-
-    @GetMapping("/user/dashboard")
-    public String userDash() {
-        return "test/user-dashboard";
-    }
     
     @GetMapping("/admin/dashboard")
     public String adminDash() {
